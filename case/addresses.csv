@@ -1,0 +1,11 @@
+address,role,status,source,notes
+0xF8895A77af3AD64c56d433DC0Ad0fD8D7D2704bF,hacker_main,confirmed,arkham screenshot,"Основной адрес. ~$259K ушло на биржи 1-10.10.2026 (ChangeNOW $258.15K, KuCoin $894.96). Сети: ETH, BNB, OP, AVAX"
+0xb68db755734bA145982aEe57134D9c2a6cF4D200,hacker_cluster?,hypothesis,arkham screenshot,"Деньги в обе стороны: прислал 0.005 BNB (газ?), получил BNB/ETH/USDT. Кандидат во второй кошелёк хакера"
+0x655e7B3E2De362FdF8bBa51d7707a839F56a7D87,victim_or_funder?,unknown,arkham screenshot,"Прислал 1.349 ETH ($3.67K). Проверить: жертва или источник?"
+0xF2397C5274A1B2e20F7d1104e2Be6918665c0955,next_hop,to_trace,arkham screenshot,"Получил 61K USDT"
+0x740d2edD5C19b360D155305a46Fb169CA8512c0,next_hop,to_trace,arkham screenshot,"Получил 45K USDC. Адрес считан со скриншота НЕ полностью (38 hex-символов вместо 40) - скопировать заново"
+0xF04CC55ABeD46E82BC3b326480Cda57182D0B2DB,next_hop,to_trace,arkham screenshot,"Получил 26.28K USDT"
+0xCFE9DC74f5e98bBbCa825dE18F65Df3c930c682d,next_hop,to_trace,arkham screenshot,"Мелочь: 12.999 USDC и 0.009 ETH"
+,changenow_deposit,confirmed,arkham screenshot,"ChangeNOW Deposit (0x4C9...) - получил 1.73 ETH. Полный адрес взять в Arkham"
+,victim_my_wallet,todo,me,"Мой web3-кошелёк, с которого украли"
+,victim_my_safepal,todo,me,"Мой SafePal (~13 500 OP)"
