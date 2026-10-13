@@ -571,21 +571,19 @@ if MODE == "preview":
         cv2.imwrite(f"{S}/preview/p_{idx:04d}.jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 92])
         print("preview", idx, timeline[idx][:3], flush=True)
 else:
-    out_path = sys.argv[3]
+    # frames go to disk so an interrupted render can resume where it stopped
+    fdir = sys.argv[3]
+    os.makedirs(fdir, exist_ok=True)
     start, end = (int(sys.argv[4]), int(sys.argv[5])) if len(sys.argv) > 5 else (0, N)
+    while start < end and os.path.exists(f"{fdir}/f_{start:04d}.jpg"):
+        start += 1
     for idx in range(max(0, start - 15), start):  # warm up the ghost-echo buffer
         compose(idx)
-    ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{OUT_W}x{OUT_H}",
-                           "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "13",
-                           "-pix_fmt", "yuv420p", "-x264-params", "aq-mode=3", out_path], stdin=subprocess.PIPE)
     import time
     t0 = time.time()
     for idx in range(start, end):
         img = compose(idx)
-        ff.stdin.write(img.tobytes())
-        if idx % 30 == 0:
-            cv2.imwrite(f"{S}/preview/run_{idx:04d}.jpg", cv2.resize(img, (1920, 1080)), [cv2.IMWRITE_JPEG_QUALITY, 88])
+        cv2.imwrite(f"{fdir}/f_{idx:04d}.jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 97, cv2.IMWRITE_JPEG_SAMPLING_FACTOR, cv2.IMWRITE_JPEG_SAMPLING_FACTOR_444])
+        if idx % 10 == 0:
             print(f"frame {idx}/{end} {(time.time() - t0) / (idx - start + 1):.2f}s/frame", flush=True)
-    ff.stdin.close()
-    ff.wait()
     print("RENDER_DONE", flush=True)

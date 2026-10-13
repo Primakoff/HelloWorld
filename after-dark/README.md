@@ -1,50 +1,69 @@
-# After Dark: 3D-графика для ивента
+# After Dark: графика для ивента
 
-Сцена для Rebirth.Ukraine × 135 Club, «After Dark», Immersive Halloween Experience,
+Rebirth.Ukraine × 135 Club, «After Dark», Immersive Halloween Experience,
 30 октября, 19:00–01:00, Ukrainian National Home, 140 2nd Ave, NYC.
 
-## Что здесь
+## Клип по репетиции (основной результат)
+
+`out/after-dark-clip-4k.mp4`: 3840×2160, 30 fps, около 19 секунд, со звуком.
+
+Сделан из видео с тренировки: танцоров вырезали из зала нейросетью и перенесли на тёмную
+ритуальную сцену. На лицах у них гипсовые маски, на головах короны существ.
+
+| Время | Акт | Что происходит |
+|---|---|---|
+| 0–4.6 с | Тьма | Свет загорается с перебоями, фигуры медленно поднимают руки (замедление 0.55x), сердцебиение |
+| 4.6–7.3 с | Крылья | Руки раскрываются в «крылья», появляются призрачные шлейфы |
+| 7.3–9.9 с | Падение | Удар, вспышка, фигуры складываются к земле, снизу поднимается красный свет |
+| 9.9–13.3 с | Звери | Звериные позы, рывки как в stop-motion, дрожь тел, огромные тени на стене |
+| 13.3–15.5 с | Выпад | Резкие выпады, три вспышки на ударах |
+| 15.5–19.3 с | Титр | AFTER DARK, дата, адрес |
+
+### Как это сделано
+
+| Шаг | Инструмент |
+|---|---|
+| Монтаж, замедление с интерполяцией кадров | ffmpeg (`minterpolate`) |
+| Вырезание танцоров из зала | MediaPipe Selfie Multiclass Segmenter, по фрагментам кадра с увеличением 2x |
+| Положение головы, плеч и глаз каждого танцора | MediaPipe Pose Landmarker (heavy), два прохода, трекинг и сглаживание |
+| Увеличение 720p → 4K | Real-ESRGAN (realesr-general-x4v3), сконвертирован в ONNX и запущен через ONNX Runtime |
+| Сцена, свет, дым, отражения, тени, маски, короны, грейд, зерно | `clip/render.py` (NumPy + OpenCV), рендер прямо в 4K |
+| Звук | `clip/sound.py`, синтез без чужой музыки, поэтому без проблем с авторскими правами |
+
+Исходник снят в 720p, поэтому лица и тела в 4K восстановлены нейросетью. Сцена, свет,
+маски и титры рисуются сразу в 4K.
+
+### Перерендер
+
+```bash
+pip install mediapipe opencv-python-headless onnx onnxruntime scipy pillow
+python3 clip/esrgan_onnx.py realesr-general-x4v3.pth models/realesr-x4v3.onnx
+# edit/: кадры планов A–E и shots.txt (см. историю), models/: модели MediaPipe и ONNX, fonts/: Anton, IBM Plex Mono
+python3 clip/analyze.py  <work>/edit <work>/models <work>/ana
+python3 clip/heads_pass2.py <work>/edit <work>/models <work>/ana
+python3 clip/render.py <work> preview 60,180,350     # проверочные кадры
+python3 clip/render.py <work> full <work>/frames     # все кадры, можно прерывать и продолжать
+python3 clip/sound.py <work>/timeline.json <work>/score.wav
+ffmpeg -framerate 30 -i <work>/frames/f_%04d.jpg -i <work>/score.wav -c:v libx264 -crf 14 -preset slow \
+  -pix_fmt yuv420p -c:a aac -b:a 320k -shortest out/after-dark-clip-4k.mp4
+```
+
+## Живая 3D-сцена (первый вариант)
 
 | Файл | Что это |
 |---|---|
-| `index.html` | Живая 3D-сцена в реальном времени (Three.js / WebGL). Открывается в любом браузере. |
-| `render.mjs` | Рендер кадров в 4K через headless Chromium и сборка видео. |
-| `out/` | Готовые файлы: 4K-видео 16:9, 4K-видео 9:16 для Stories/Reels, стоп-кадры без текста. |
+| `index.html` | 3D-сцена в реальном времени (Three.js / WebGL), открывается в браузере |
+| `render.mjs` | Рендер кадров этой сцены в 4K через headless Chromium |
 
-Сцена: полукруг фигур в рваных льняных балахонах и гипсовых масках (солнце, тернии,
-полумесяц, затмение, звезда, птичий клюв), одна фигура на коленях тянется к свечам.
-Сверху бьёт прожектор, в воздухе пыль и пепел, на заднем плане бледный полумесяц.
-Цвет: сепия и монохром как на постере, красный сохраняется только в контровом свете.
-Петля длится 10 секунд и замыкается без шва.
+## Промпты для генеративных видеомоделей (Veo 3, Sora, Runway Gen-4, Kling 2)
 
-## Перерендер
+Если есть доступ к этим сервисам, возьмите кадр из клипа как стартовый (image-to-video),
+чтобы сохранить стиль.
 
-```bash
-npm i three@0.158.0 playwright
-THREE_JS=node_modules/three/build/three.min.js node render.mjs out/h 3840 2160 24 1 frames
-ffmpeg -framerate 24 -i out/h/f_%04d.png -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p after-dark-4k.mp4
-```
+> Dark folk-horror ritual on a black stage. Dancers in black with blank white plaster masks
+> and crowns: a spiked sun, a crescent moon, antlers, a five-point star, a crown of thorns.
+> They crouch and claw like animals, then rise with arms spread like wings. One hard
+> spotlight from above, drifting smoke, giant shadows on the wall behind them, deep red
+> underlight from the floor, wet reflective floor, ash-grey grade, 35mm grain, 4K.
 
-Аргументы: `<папка> <ширина> <высота> <fps> <текст 1|0> <frames | still:t1,t2>`.
-
-## Промпты для AI-видеомоделей (Veo 3, Sora, Runway Gen-4, Kling 2)
-
-Используй стоп-кадр из `out/clean*` как стартовый кадр (image-to-video), чтобы сохранить стиль.
-
-**Основной (16:9, 8–10 с):**
-> Cinematic slow dolly shot in a pitch-black theatre. A ritual circle of dancers in torn,
-> ash-grey linen robes and white plaster masks: a radiant sun crown with long spikes, a
-> crescent moon, a five-point star, a beaked bird mask, a crown of thorns. One dancer kneels
-> in front, reaching toward a ring of small candles on a wet black floor. A single hard
-> spotlight from above cuts through drifting dust and haze. Monochrome sepia grade, deep
-> crushed blacks, subtle red rim light, 35mm film grain, shallow depth of field, slow
-> hypnotic movement, Ukrainian folk-horror mood. 4K, 24 fps.
-
-**Вертикальный (9:16, для Reels/Stories):**
-> Vertical 9:16. Low-angle shot rising slowly toward a dancer in a white plaster sun mask
-> with radiating spikes, arms raised, torn linen sleeves moving in still air, single
-> overhead spotlight, dust particles, black void background, faint giant crescent moon in
-> haze, sepia monochrome with a thin red edge light, film grain, 4K.
-
-**Негатив (если модель поддерживает):** cartoon, bright colors, gore, blood, modern clothing,
-smiling faces, text, watermark.
+**Негатив:** cartoon, bright colors, gore, smiling faces, text, watermark.
