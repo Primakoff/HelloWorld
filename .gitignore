@@ -2,3 +2,4 @@ node_modules
 after-dark/node_modules
 *.png
 after-dark/out/*.mp4
+__pycache__/
