@@ -30,11 +30,11 @@ Thread 🧵
 
 **2/**
 What happened to me:
-On [[DATE]], ~13,500 $OP was drained from my wallet on Optimism.
+Oct 2, 07:52 AM ET — 8.58 ETH (~$21.5K) left my wallet in one transfer. Then ~13,500 $OP.
 
-Tx: [[optimistic.etherscan.io/tx/...]]
+Tx: [[explorer link to 0x0156f8af…c6f3]]
 
-[[Attack vector, once confirmed — e.g. "The tx was signed by my own key → seed phrase compromise, not a malicious approval."]]
+It's a plain ETH transfer signed with my own key — not a malicious approval. My seed was compromised, and the amount (8.582192183030113058, balance minus gas) looks like a bot sweep.
 
 **3/**
 The receiving address is a collector, not a one-off wallet.

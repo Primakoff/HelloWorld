@@ -45,8 +45,11 @@
 ## Шаг 4. Description (публичное описание) — скопировать целиком
 
 ```
-Wallet compromise / theft. My seed phrase was compromised and funds were drained
-from my wallets, including approx. 13,500 OP on Optimism, around [[DATE, e.g. early October 2026]].
+Wallet compromise / theft. My private key / seed phrase was compromised and my wallets
+were drained. On Oct 2, 2026 at 11:52 UTC, 8.582192 ETH (~$21.5K) was sent from my
+address to 0xF8895A77af3AD64c56d433DC0Ad0fD8D7D2704bF in a plain transfer signed with
+my key (tx 0x0156f8af4b156174bc5fe492ecc33fe254857494a1a907469cb436011747c6f3).
+Approx. 13,500 OP on Optimism was taken afterwards.
 
 The stolen funds were consolidated at 0xF8895A77af3AD64c56d433DC0Ad0fD8D7D2704bF,
 which appears to be a collector address for multiple victims: according to Arkham,
@@ -71,7 +74,18 @@ please review the deposits and balances above. A report is being filed with FBI 
 Последнюю фразу про IC3 оставляйте, только если заявление уже подано или будет подано
 в ближайшие дни.
 
-## Шаг 5. Losses (ущерб)
+## Шаг 5. Losses (ущерб): две строки
+
+**Строка 1 — ETH (подтверждено):**
+
+| Поле | Ответ |
+|---|---|
+| Amount | `8.582192` |
+| Token / Asset | `ETH` |
+| Chain | `[[Arbitrum — проверить домен эксплорера: arbiscan.io = Arbitrum]]` |
+| USD value | `21473` |
+
+**Строка 2 — OP:**
 
 | Поле | Ответ |
 |---|---|
@@ -80,11 +94,12 @@ please review the deposits and balances above. A report is being filed with FBI 
 | Chain | `Optimism` |
 | USD value (если спросят) | `[[цена OP на дату кражи × 13 500]]`. Смотреть на CoinGecko → OP → Historical data |
 
-Если со второго кошелька тоже что-то украли, добавьте отдельную строку ущерба.
-
 ## Шаг 6. Transaction hashes
 
-`[[хэш транзакции, которой OP ушли с вашего адреса]]`
+ETH (готово):
+`0x0156f8af4b156174bc5fe492ecc33fe254857494a1a907469cb436011747c6f3`
+
+OP: `[[хэш транзакции, которой OP ушли с вашего адреса]]`
 
 Где взять: optimistic.etherscan.io → вставить **свой** адрес → вкладка **Token Transfers**
 → найти исходящий перевод OP на дату кражи → скопировать Txn Hash (начинается с `0x`,

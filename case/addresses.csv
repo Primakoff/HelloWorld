@@ -7,5 +7,6 @@ address,role,status,source,notes
 0xF04CC55ABeD46E82BC3b326480Cda57182D0B2DB,next_hop,to_trace,arkham screenshot,"Получил 26.28K USDT"
 0xCFE9DC74f5e98bBbCa825dE18F65Df3c930c682d,next_hop,to_trace,arkham screenshot,"Мелочь: 12.999 USDC и 0.009 ETH"
 ,changenow_deposit,confirmed,arkham screenshot,"ChangeNOW Deposit (0x4C9...) - получил 1.73 ETH. Полный адрес взять в Arkham"
-,victim_my_wallet,todo,me,"Мой web3-кошелёк, с которого украли"
+0xDFC1AA76eBc7117cCB018dD9833b302153a0F518,victim_my_wallet,confirmed,explorer tx,"Мой кошелёк. 02.10.2026 11:52:17 UTC отправлено 8.582192183030113058 ETH ($21,473) на 0xF889, tx 0x0156f8af4b156174bc5fe492ecc33fe254857494a1a907469cb436011747c6f3, блок 510975537 (L2, вероятно Arbitrum - проверить). Простой перевод, подписан моим ключом = ключ скомпрометирован"
+,hacker_gas_funder?,todo,explorer,"Кто прислал мелкий ETH на газ на МОЙ адрес в Optimism прямо перед кражей OP - это адрес хакера"
 ,victim_my_safepal,todo,me,"Мой SafePal (~13 500 OP)"
