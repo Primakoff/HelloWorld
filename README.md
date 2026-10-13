@@ -4,9 +4,25 @@
 
 ```
 case/addresses.csv      — все адреса дела: роль, статус, заметки (главный реестр)
+case/chainabuse_report.md — готовые ответы для репорта на Chainabuse
 tracer/fetch_etherscan.py — скачать переводы адреса через Etherscan API
 tracer/analyze.py       — отчёт: финансирование, потоки, биржи, контрагенты, граф
 ```
+
+### Настройка: доступ Claude к Etherscan (делается один раз)
+
+Ключ API **не вставлять в чат и не коммитить в репозиторий**: репозиторий может стать
+публичным, а чат хранится в истории.
+
+1. Получить бесплатный ключ: etherscan.io → войти → **My API Keys** → **Add**.
+2. В claude.ai/code: меню облачного окружения в заголовке сессии → **Edit**.
+3. **Network access** → Allowed domains → добавить `api.etherscan.io`
+   (галочку «Allow package managers» не снимать).
+4. Добавить ключ в **Network secrets** (или в environment variables) под именем
+   `ETHERSCAN_API_KEY`.
+5. Начать **новую** сессию и написать: «ключ добавлен, скачай данные по делу».
+
+Дальше Claude запускает `tracer/fetch_etherscan.py` и `tracer/analyze.py` сам.
 
 ---
 
