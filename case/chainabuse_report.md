@@ -35,7 +35,7 @@
 | 4 | `0xF04CC55ABeD46E82BC3b326480Cda57182D0B2DB` | Да. Получил 26.28K USDT |
 | 5 | `0x740d2edD…` (получил 45K USDC) | Только после копирования полного адреса из Arkham |
 
-`0x655e7B3E…` **не добавлять**: это может быть другая жертва.
+`0x655e7B3E…` и `0x06990583…9BCb2` **не добавлять**: это, скорее всего, другие жертвы.
 
 ## Шаг 3. Domain / Website
 
@@ -82,7 +82,7 @@ please review the deposits and balances above. A report is being filed with FBI 
 |---|---|
 | Amount | `8.582192` |
 | Token / Asset | `ETH` |
-| Chain | `[[Arbitrum — проверить домен эксплорера: arbiscan.io = Arbitrum]]` |
+| Chain | `Arbitrum One` |
 | USD value | `21473` |
 
 **Строка 2 — OP:**
