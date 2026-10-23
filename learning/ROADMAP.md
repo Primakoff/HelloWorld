@@ -19,6 +19,16 @@
 \* Ориентиры, а не обещания. Перед поиском проверить свежие цифры на LinkedIn, Glassdoor
 и в вакансиях с указанной зарплатой (в NYC её обязаны указывать).
 
+**Как это называется по-английски:**
+- Сфера: **Crypto Financial Crime** / **Blockchain Investigations** (часть Web3 Security и AML).
+- Должности по ступеням:
+  - 2: *KYC Analyst*, *AML Analyst*, *Financial Crime Analyst*
+  - 3: *Crypto Compliance Analyst*, *Transaction Monitoring Analyst (Digital Assets)*, *Sanctions Analyst*
+  - 4: **Blockchain Investigator**, *Blockchain Intelligence Analyst*, *Crypto Investigations Analyst*
+  - дальше: *Senior Investigator* → *Investigations Lead* → *Head of Financial Crime*
+- Заголовок LinkedIn сейчас: `On-chain Investigations | Crypto AML | Tracing stolen funds`
+- Цель: `Blockchain Investigator | Crypto AML & Financial Crime`
+
 **Почему не другие пути:**
 - Аудит смарт-контрактов: самый высокий потолок, но гуманитарию нужно 2–3 года серьёзного
   программирования, а доход нестабилен (конкурсы, баг-баунти). Не даст $3–4K к нужному сроку.
