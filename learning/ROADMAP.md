@@ -22,7 +22,8 @@
 **Как это называется по-английски:**
 - Сфера: **Crypto Financial Crime** / **Blockchain Investigations** (часть Web3 Security и AML).
 - Должности по ступеням:
-  - 2: *KYC Analyst*, *AML Analyst*, *Financial Crime Analyst*
+  - 2: *KYC Analyst*, *AML Analyst*, *Fraud Analyst*, *Financial Crime Analyst*
+    (самый простой вход; навыки AML нужны и банкам, поэтому это страховка, если крипторынок просядет)
   - 3: *Crypto Compliance Analyst*, *Transaction Monitoring Analyst (Digital Assets)*, *Sanctions Analyst*
   - 4: **Blockchain Investigator**, *Blockchain Intelligence Analyst*, *Crypto Investigations Analyst*
   - дальше: *Senior Investigator* → *Investigations Lead* → *Head of Financial Crime*
