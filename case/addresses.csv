@@ -1,6 +1,6 @@
 address,role,status,source,notes
 0xF8895A77af3AD64c56d433DC0Ad0fD8D7D2704bF,hacker_main,confirmed,arkham screenshot,"Основной адрес. ~$259K ушло на биржи 1-10.10.2026 (ChangeNOW $258.15K, KuCoin $894.96). Сети: ETH, BNB, OP, AVAX"
-0xb68db755734bA145982aEe57134D9c2a6cF4D200,hacker_cluster?,hypothesis,arkham screenshot,"Деньги в обе стороны: прислал 0.005 BNB (газ?), получил BNB/ETH/USDT. Кандидат во второй кошелёк хакера"
+0xb68db755734bA145982aEe57134D9c2a6cF4D200,hacker_operator,strong_hypothesis,arkham screenshot,"Операционный кошелёк: оплатил сборщику газ в BNB Chain (0.005 BNB) и получил от него 0.449 BNB, 0.026+0.098 ETH, 110 USDT. Предварительный адрес мошенника №2"
 0x655e7B3E2De362FdF8bBa51d7707a839F56a7D87,victim_or_funder?,unknown,arkham screenshot,"Прислал 1.349 ETH ($3.67K). Проверить: жертва или источник?"
 0xF2397C5274A1B2e20F7d1104e2Be6918665c0955,next_hop,to_trace,arkham screenshot,"Получил 61K USDT"
 0x740d2edD5C19b360D155305a46Fb169CA8512c0,next_hop,to_trace,arkham screenshot,"Получил 45K USDC. Адрес считан со скриншота НЕ полностью (38 hex-символов вместо 40) - скопировать заново"

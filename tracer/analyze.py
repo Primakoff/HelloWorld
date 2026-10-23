@@ -93,7 +93,22 @@ def map_columns(header):
     return mapping
 
 
-def load(paths):
+STABLES = {"USDT", "USDC", "USDC.E", "USDT0", "USDBC", "DAI", "FDUSD", "BUSD", "TUSD", "USDE", "PYUSD"}
+
+
+def estimate_usd(rows, prices):
+    """Fill missing USD (Etherscan exports have none): stablecoins at $1, others at --price."""
+    for r in rows:
+        if r["usd"] is None and r["amount"] is not None:
+            sym = r["token"].upper()
+            if sym in STABLES:
+                r["usd"] = r["amount"]
+            elif sym in prices:
+                r["usd"] = r["amount"] * prices[sym]
+    return rows
+
+
+def load(paths, prices=None):
     rows = []
     for path in paths:
         with open(path, newline="", encoding="utf-8-sig") as f:
@@ -124,7 +139,7 @@ def load(paths):
             continue
         seen.add(key)
         unique.append(r)
-    return unique
+    return estimate_usd(unique, prices or {})
 
 
 def classify(label):
@@ -295,10 +310,13 @@ def main():
     p.add_argument("--out", default="report.md")
     p.add_argument("--hops", default="next_hops.csv")
     p.add_argument("--min-usd", type=float, default=100.0, help="threshold for graph and next hops")
+    p.add_argument("--price", action="append", default=[], metavar="SYM=USD",
+                   help="price for rows without USD, e.g. --price ETH=2450 (stablecoins are $1)")
     a = p.parse_args()
 
+    prices = {k.upper(): float(v) for k, v in (s.split("=", 1) for s in a.price)}
     cluster = {t.lower() for t in a.target}
-    rows = load(a.files)
+    rows = load(a.files, prices)
     text, _, cps = report(rows, cluster, a.min_usd)
     Path(a.out).write_text(text + "\n", encoding="utf-8")
     n = write_next_hops(a.hops, cps, a.min_usd)

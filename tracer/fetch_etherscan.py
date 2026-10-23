@@ -44,19 +44,14 @@ def call(key, chainid, **params):
     return []
 
 
-def main():
-    p = argparse.ArgumentParser()
-    p.add_argument("address")
-    p.add_argument("--chains", nargs="+", default=["eth", "op", "bsc", "arb", "base"], choices=CHAINS)
-    p.add_argument("--out")
-    a = p.parse_args()
-    key = os.environ.get("ETHERSCAN_API_KEY") or sys.exit("set ETHERSCAN_API_KEY")
-    out = a.out or f"{a.address.lower()[:10]}.csv"
+HEADER = ["hash", "from", "to", "token", "amount", "chain", "timestamp"]
 
+
+def fetch(key, address, chains):
     rows = []
-    for name in a.chains:
+    for name in chains:
         cid = CHAINS[name]
-        base = dict(module="account", address=a.address, startblock=0, endblock=99999999, sort="asc")
+        base = dict(module="account", address=address, startblock=0, endblock=99999999, sort="asc")
         for tx in call(key, cid, action="txlist", **base):
             if int(tx["value"]) == 0 or tx.get("isError") == "1":
                 continue
@@ -71,13 +66,27 @@ def main():
             dec = int(tx.get("tokenDecimal") or 18)
             rows.append([tx["hash"], tx["from"], tx["to"], tx["tokenSymbol"],
                          int(tx["value"]) / 10 ** dec, name, tx["timeStamp"]])
-        print(f"{name}: {len(rows)} rows so far")
+        print(f"  {address[:10]} {name}: {len(rows)} rows so far")
         time.sleep(0.4)
+    return rows
 
-    with open(out, "w", newline="") as f:
+
+def write(path, rows):
+    with open(path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["hash", "from", "to", "token", "amount", "chain", "timestamp"])
+        w.writerow(HEADER)
         w.writerows(rows)
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("address")
+    p.add_argument("--chains", nargs="+", default=["eth", "op", "bsc", "arb", "base"], choices=CHAINS)
+    p.add_argument("--out")
+    a = p.parse_args()
+    key = os.environ.get("ETHERSCAN_API_KEY") or sys.exit("set ETHERSCAN_API_KEY")
+    out = a.out or f"{a.address.lower()[:10]}.csv"
+    write(out, fetch(key, a.address, a.chains))
     print(f"-> {out}  (no USD column: Etherscan does not give historical prices; "
           "Arkham export does)")
 
