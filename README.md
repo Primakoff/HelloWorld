@@ -184,6 +184,19 @@ tracer/match_swaps.py   — кандидаты на выплаты обменн�
   Источники: [Lookout](https://security.lookout.com/blog/darksword),
   [BleepingComputer](https://www.bleepingcomputer.com/news/security/new-darksword-ios-exploit-used-in-infostealer-attack-on-iphones/),
   [The Hacker News](https://thehackernews.com/2026/03/darksword-ios-exploit-kit-uses-6-flaws.html).
+- **Состав DarkSword (Google GTIG):** цепочка из 6 уязвимостей, вход через Safari (движок
+  JavaScriptCore), затем вредоносы семейств **GHOSTBLADE** (крадёт данные), GHOSTKNIFE, GHOSTSABER.
+  GHOSTBLADE ищет приложения бирж и кошельков (Coinbase, Binance, Kraken, KuCoin, OKX, MEXC,
+  Ledger, Trezor, MetaMask, Exodus, Uniswap, Phantom, Safe и др.), а также забирает сообщения,
+  сохранённые пароли, cookies и историю Safari, контакты, пароли Wi-Fi.
+- **⭐ 19.10.2026, SlowMist:** найден готовый к развёртыванию набор для атак, собранный из
+  **публичного кода DarkSword**. Реально работает на **iOS 18.6–18.7.2** и 26.0–26.1. Содержит
+  функции расшифровки данных кошельков и **сведения средств в одно место**. Это значит, что
+  эксплойт попал в руки обычных преступников, а не только спецслужб, и по времени (сентябрь–
+  октябрь 2026) это совпадает с моей кражей. Закрыто в iOS 18.7.6 / 26.3.1.
+  [TokenPost](https://www.tokenpost.com/news/technology/34802),
+  [iVerify](https://www.iverify.com/blog/darksword-ios-exploit-kit-explained),
+  [Decrypt](https://decrypt.co/361888/apple-ios-malware-targets-crypto-apps-on-unpatched-iphones-google).
 - **Coruna** — родственный набор для iOS 13.0–17.2.1, применялся для кражи криптовалюты
   через поддельные крипто- и гемблинг-сайты.
   [BleepingComputer](https://www.bleepingcomputer.com/news/security/spyware-grade-coruna-ios-exploit-kit-now-used-in-crypto-theft-attacks/).
